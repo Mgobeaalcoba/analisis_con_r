@@ -20,7 +20,7 @@ colSums(tiempo_matrix)
 
 # Quiero ahora agregarle una nuevo fila a mi matriz:
 
-final_matrix <- rbind(tiempo_matrix, podcast = c(10,15,30,5,0)) # rbind se usa para agregar una nueva fila a mi matriz. En este caso guardandola en una segunda matriz
+final_matrix <- rbind(tiempo_matrix, podcast = c(10,15,30,5,0)) # rbind se usa para agregar una nueva fila (row) a mi matriz. En este caso guardandola en una segunda matriz
 final_matrix
 
 colSums(final_matrix)
