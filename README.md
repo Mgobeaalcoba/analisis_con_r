@@ -1,2 +1,2 @@
-# An-lisis-con-R
+# Análisis-con-R
 Trabajos de análisis realizados con lenguaje R
