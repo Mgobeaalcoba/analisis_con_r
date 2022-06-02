@@ -21,3 +21,7 @@ wt
 
 mtcars.new <- transform(mtcars, wt=wt*1000/2) # Guardo en un nuevo dataset todo igual salvo la columna wt(peso) a la que le aplico la transformación deseada
 summary(mtcars.new) # Veo las medidas centrales de mi nuevo dataset
+
+# Para ver un dataset X podemos usar el comando View("dataset") por consola o en el script y correrlo
+
+View(orangeec)
