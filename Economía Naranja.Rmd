@@ -1,0 +1,91 @@
+---
+title: "First R Markdown"
+author: "Marian Gobea"
+date: '2022-06-02'
+output: html_document
+---
+
+```{r} 
+orangeec <- read.csv("C:/Users/mgobea/Desktop/Orangeec.csv")
+data(orangeec)
+summary(orangeec)
+```
+
+Otra forma de imprimir nuestro chunk o "pedazo de codigo es con ctrl + alt + i
+
+```{r}
+pairs(orangeec[,6:10])
+```
+
+Siempre que quiera ir viendo como va quedando mi markdown lo hago a traves del boton Knit que tengo arriba en R Studio
+
+```{r}
+library(ggplot2)
+```
+
+Ahora vamos a graficar con ggplot2
+
+```{r}
+ggplot()+geom_histogram(data = orangeec,
+                        aes(x=Internet.penetration...population), fill="red", color="yellow", # con fill elijo el color de relleno de mis barras, con color el color de contorno
+                        binwidth = 5)+ 
+  labs(x= "Penetracion internet (%)población", y="Cantidad de paises",
+       title= "Penetración de internet en paises latam")+
+  theme(legend.position = "none") + 
+  theme(panel.background = element_blank(), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+Ahora necesitamos medidas de tendencia central por lo que requerimos trabajar con Dplyr
+
+```{r}
+library(dplyr)
+```
+
+Ahora calculo la media del GDP per capita
+
+```{r}
+media <- mean(orangeec$GDP.PC, na.rm = TRUE)
+media
+```
+
+Sobre la base de la media construida ahora vamos a armar una nueva columna para el dataset
+
+```{r}
+orangeec <- orangeec %>%
+  mutate(Strong_economy = ifelse(GDP.PC < media,
+                                  "Por debajo promedio PIB per capita",
+                                  "Sobre-Arriba promedio PIB per capita"))
+```
+
+Veo ahora como me quedó el Data Frame
+
+```{r}
+orangeec
+```
+
+Ahora graficamos
+
+```{r}
+ggplot(orangeec, aes(x = Strong_economy, y = Creat.Ind...GDP, fill = Strong_economy ))+
+  geom_boxplot(alpha = 0.4)+
+  labs(x = "Tipo de pais", y = "Aporte economía naranja al PIB",
+       title = "Aporte economía naranja en pib paises latam con alto y bajo pib per capita")+
+  theme(legend.position = "none") + 
+  theme(panel.background = element_blank(), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+El boxplot indica que los paises sobre el prom en pib per capita, tienen una dispersión mucho mas alta en cuanto a los aportes de la economía naranja al pib del país. OJO confirmar con desviación estandar.
+
+
+
+
+
+
+
+
+
+
+
+
